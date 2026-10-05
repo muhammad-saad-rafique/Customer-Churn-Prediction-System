@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer Churn Control Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="topbar">
+            <div>
+                <p class="eyebrow">Machine Learning Pipeline</p>
+                <h1>Customer Churn Control Room</h1>
+            </div>
+            <div class="status-strip">
+                <span id="databaseStatus" class="status-pill">Database stopped</span>
+                <span id="predictionStatus" class="status-pill">Predictor stopped</span>
+            </div>
+        </section>
+
+        <section class="control-panel">
+            <button id="databaseToggle" class="primary-button" type="button">
+                <span class="button-icon">></span>
+                <span>Start Database</span>
+            </button>
+            <button id="predictionToggle" class="secondary-button" type="button">
+                <span class="button-icon">></span>
+                <span>Run Predictor</span>
+            </button>
+        </section>
+
+        <section class="stats-grid">
+            <article class="metric-card">
+                <p>Total Customers</p>
+                <strong id="totalCustomers">0</strong>
+            </article>
+            <article class="metric-card">
+                <p>Total Predictions</p>
+                <strong id="totalPredictions">0</strong>
+            </article>
+            <article class="metric-card">
+                <p>Correct Answers</p>
+                <strong id="correctPredictions">0</strong>
+            </article>
+            <article class="metric-card">
+                <p>Accuracy</p>
+                <strong id="accuracy">N/A</strong>
+            </article>
+        </section>
+
+        <section class="analysis-grid">
+            <article class="analysis-panel">
+                <div class="panel-header">
+                    <h2>Prediction Mix</h2>
+                    <span id="churnRate">0% churn</span>
+                </div>
+                <div class="bars">
+                    <div>
+                        <div class="bar-label">
+                            <span>Churn</span>
+                            <strong id="churnCount">0</strong>
+                        </div>
+                        <div class="bar-track">
+                            <div id="churnBar" class="bar-fill churn"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bar-label">
+                            <span>Not Churn</span>
+                            <strong id="notChurnCount">0</strong>
+                        </div>
+                        <div class="bar-track">
+                            <div id="notChurnBar" class="bar-fill not-churn"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="analysis-panel">
+                <div class="panel-header">
+                    <h2>Pipeline</h2>
+                    <span id="lastUpdated">Waiting...</span>
+                </div>
+                <div class="timeline">
+                    <div>
+                        <span class="dot"></span>
+                        <p>Database button continuously adds customers every 2 seconds.</p>
+                    </div>
+                    <div>
+                        <span class="dot"></span>
+                        <p>Predict button runs the prediction worker over new rows.</p>
+                    </div>
+                    <div>
+                        <span class="dot"></span>
+                        <p>Dashboard refreshes automatically and compares labeled rows.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="table-grid">
+            <article class="table-panel">
+                <div class="panel-header">
+                    <h2>Recent Customers</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Plan</th>
+                                <th>Contract</th>
+                                <th>Actual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTable"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="table-panel">
+                <div class="panel-header">
+                    <h2>Recent Predictions</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Predicted</th>
+                                <th>Probability</th>
+                                <th>Correct</th>
+                            </tr>
+                        </thead>
+                        <tbody id="predictionsTable"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Python cache and local environment files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local data, generated database, and large model artifacts
+*.db
+*.csv
+*.pkl
+
+# Ignore notebooks by default, then allow only the selected notebook
+*.ipynb
+!customer-churn-prediction-1.ipynb
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
